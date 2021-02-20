@@ -10,6 +10,11 @@ npm install
 npm run serve
 ```
 
+### Compiles and runs with deployment settings
+```
+npm run serve
+```
+
 ### Compiles and minifies for production
 ```
 npm run build
@@ -18,6 +23,11 @@ npm run build
 ### Lints and fixes files
 ```
 npm run lint
+```
+
+### deploys
+```
+npm run deploy
 ```
 
 ### Customize configuration
