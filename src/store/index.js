@@ -142,6 +142,7 @@ export default new Vuex.Store({
               context.state.showSuccessAlert = true
               context.state.connected = true
               router.push("Play")
+              Vue.$cookies.set('buzzUid', {"userId":context.state.userId, "playerName":context.state.playerName }, 'Infinity', null, null, null, 'Strict');
             }
           }
           if (message["MessageType"] === messageId.errorMessage) {
@@ -204,6 +205,19 @@ export default new Vuex.Store({
         "UserId": userId,
       }
       context.state.webSocket.send(JSON.stringify(kickMessage))
+    },
+    loadCookieData(context) {
+      context.state.userId = 0
+      context.state.playerName = "Player Name"
+      let buzzUid = Vue.$cookies.get("buzzUid");
+      if(buzzUid != undefined) {
+        if(buzzUid.userId != undefined) {
+          context.state.userId = parseInt(buzzUid.userId)
+        }
+        if(buzzUid.playerName != undefined) {
+          context.state.playerName = buzzUid.playerName
+        }
+      }
     }
   },
   modules: {

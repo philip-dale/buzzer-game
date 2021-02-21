@@ -9,6 +9,14 @@
   </div>
 </template>
 
+<script>
+export default {
+  beforeMount() {
+    this.$store.dispatch('loadCookieData')
+  }
+}
+</script>
+
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
