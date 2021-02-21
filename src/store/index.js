@@ -15,6 +15,8 @@ const messageId = {
   "adminMessage": 6,
   "quitMessage": 7,
   "kickPlayerMessage": 8,
+  "PingMessageType": 9,
+  "PongMessageType": 10,
 }
 
 const adminMessageCommands = {
@@ -118,7 +120,7 @@ export default new Vuex.Store({
       context.state.webSocket.onmessage = function (event) {
         var message = JSON.parse(event.data)
         if ("MessageType" in message) {
-          if (message["MessageType"] === messageId.gameStatusMessage) { // game status
+          if (message["MessageType"] === messageId.gameStatusMessage) {
             if ("Status" in message) {
               context.state.gameStatus = message["Status"]
 
@@ -128,12 +130,12 @@ export default new Vuex.Store({
               });
             }
           }
-          if (message["MessageType"] === messageId.playerStatusMessage) { // player status
+          if (message["MessageType"] === messageId.playerStatusMessage) {
             if ("Status" in message) {
               context.state.playerStatus = message["Status"]
             }
           }
-          if (message["MessageType"] === messageId.connectedMessage) { // connection accepted
+          if (message["MessageType"] === messageId.connectedMessage) {
             if ("UserId" in message) {
               context.state.userId = message["UserId"]
               context.state.successMessage = "Game Joined"
@@ -142,11 +144,17 @@ export default new Vuex.Store({
               router.push("Play")
             }
           }
-          if (message["MessageType"] === messageId.errorMessage) { // Error Message
+          if (message["MessageType"] === messageId.errorMessage) {
             if ("MessageText" in message) {
               context.state.errorMessage = message["MessageText"]
               context.state.showErrorAlert = true
             }
+          }
+          if (message["MessageType"] === messageId.PingMessageType) {
+            var pongMessage = {
+              "MessageType": messageId.PongMessageType,
+            }
+            context.state.webSocket.send(JSON.stringify(pongMessage))
           }
         }
       }
