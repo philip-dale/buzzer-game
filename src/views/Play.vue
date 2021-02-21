@@ -58,10 +58,27 @@ export default {
 }
 
 .buzzer-button {
-  border: thick solid black;
+  /* border: thick solid black; */
   width: 100%;
   height: 100%;
   min-height: 200px;
+  font-size: 3rem;
+  font-weight: bolder;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -moz-box-shadow:
+		-10px 10px 10px rgba(000,000,000,0.5),
+		inset -1px 2px 0px rgba(255,255,255,0.4);
+	-webkit-box-shadow:
+		-10px 10px 10px rgba(000,000,000,0.5),
+		inset -1px 2px 0px rgba(255,255,255,0.4);
+	box-shadow:
+		-10px 10px 10px rgba(000,000,000,0.5),
+		inset -1px 2px 0px rgba(255,255,255,0.4);
+	text-shadow:
+		-2px 2px 2px rgba(000,000,000,0.7),
+		0px -1px 0px rgba(255,255,255,0.4);
 }
 
 .buzzer-buzzing {
