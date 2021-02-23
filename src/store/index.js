@@ -245,7 +245,14 @@ export default new Vuex.Store({
           context.state.adminId = buzzUid.adminId
         }
       }
-    }
+    },
+    clearData(context) {
+      Vue.$cookies.remove("buzzUid")
+      context.state.userId = 0
+      context.state.playerName = "Player Name"
+      context.state.serverId = ""
+      context.state.adminId  = ""
+    },
   },
   modules: {
   }

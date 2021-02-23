@@ -25,6 +25,9 @@
       <div>
         <b-button class="signin-button" @click="quitGame()" variant="primary">Quit</b-button>
       </div>
+      <div>
+        <b-button class="signin-button" @click="clearData()" variant="primary">Clear Data</b-button>
+      </div>
     </div>
     <b-alert v-model="showErrorAlert" variant="danger" dismissible>
       {{errorMessage}}
@@ -84,7 +87,10 @@ export default {
     },
     quitGame() {
       this.$store.dispatch("quitGame")
-    }
+    },
+    clearData() {
+      this.$store.dispatch("clearData")
+    },
   }
 };
 </script>
