@@ -35,8 +35,6 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* margin-left: 5px;
-  margin-right: 5px; */
 }
 .buzzer-button {
   background-color: red;

@@ -142,7 +142,7 @@ export default new Vuex.Store({
               context.state.showSuccessAlert = true
               context.state.connected = true
               router.push("Play")
-              Vue.$cookies.set('buzzUid', {"userId":context.state.userId, "playerName":context.state.playerName }, 'Infinity', null, null, null, 'Strict');
+              context.dispatch("saveCookieData")
             }
           }
           if (message["MessageType"] === messageId.errorMessage) {
@@ -161,12 +161,18 @@ export default new Vuex.Store({
       }
 
       context.state.webSocket.onclose = function () {
-        console.log(`Game Server Connection Closed`);
+        console.log("Game Server Connection Closed");
+        context.state.errorMessage = "Game Server Connection Closed"
+        context.state.showSuccessAlert = false
+        context.state.showErrorAlert = true
         context.state.connected = false
       }
 
       context.state.webSocket.onerror = function (error) {
         console.log(error)
+        context.state.errorMessage = error
+        context.state.showSuccessAlert = false
+        context.state.showErrorAlert = true
       }
     },
     quitGame(context) {
@@ -176,6 +182,9 @@ export default new Vuex.Store({
       }
       context.state.webSocket.send(JSON.stringify(quitMessage))
       context.state.webSocket.close()
+      context.state.errorMessage = "Quit Game"
+      context.state.showSuccessAlert = true
+      context.state.showErrorAlert = false
       context.state.connected = false
     },
     buzz(context) {
@@ -196,6 +205,7 @@ export default new Vuex.Store({
           "Command": adminMessageCommands[action],
         }
         context.state.webSocket.send(JSON.stringify(adminMessage))
+        context.dispatch("saveCookieData")
       }
     },
     kickPlayer(context, userId) {
@@ -206,9 +216,19 @@ export default new Vuex.Store({
       }
       context.state.webSocket.send(JSON.stringify(kickMessage))
     },
+    saveCookieData(context) {
+      Vue.$cookies.set('buzzUid', {
+        "userId":context.state.userId,
+        "playerName":context.state.playerName,
+        "serverId": context.state.serverId,
+        "adminId" : context.state.adminId
+      },'Infinity', null, null, null, 'Strict');
+    },
     loadCookieData(context) {
       context.state.userId = 0
       context.state.playerName = "Player Name"
+      context.state.serverId = ""
+      context.state.adminId  = ""
       let buzzUid = Vue.$cookies.get("buzzUid");
       if(buzzUid != undefined) {
         if(buzzUid.userId != undefined) {
@@ -216,6 +236,12 @@ export default new Vuex.Store({
         }
         if(buzzUid.playerName != undefined) {
           context.state.playerName = buzzUid.playerName
+        }
+        if(buzzUid.serverId != undefined) {
+          context.state.serverId = buzzUid.serverId
+        }
+        if(buzzUid.adminId != undefined) {
+          context.state.adminId = buzzUid.adminId
         }
       }
     }

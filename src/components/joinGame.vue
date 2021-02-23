@@ -18,11 +18,13 @@
         type="text"
       ></b-form-input>
     </div>
-    <div>
-      <b-button @click="joinGame()" variant="primary">Join</b-button>
-    </div>
-    <div>
-      <b-button @click="quitGame()" variant="primary">Quit</b-button>
+    <div class="inputDiv">
+      <div>
+        <b-button class="signin-button" @click="joinGame()" variant="primary">Join</b-button>
+      </div>
+      <div>
+        <b-button class="signin-button" @click="quitGame()" variant="primary">Quit</b-button>
+      </div>
     </div>
     <b-alert v-model="showErrorAlert" variant="danger" dismissible>
       {{errorMessage}}
@@ -109,12 +111,15 @@ export default {
 .inputDiv {
   display: flex;
   flex-direction: row;
-  /* width: fit-content; */
+  align-self: center;
   margin: 0;
 }
 
 .inputBox {
   margin: 5px;
-  /* width: 25%; */
+}
+
+.signin-button {
+  margin: 5px;
 }
 </style>

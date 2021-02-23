@@ -5,7 +5,6 @@
       <b-row class="row-class">
         <b-col sm class="column-class">
           <div class="col-div"><players/></div>
-          
         </b-col>
         <b-col sm><div :class="buzzerButtonClass" @click="buzz()"> BUZZ </div></b-col>
       </b-row>
@@ -40,7 +39,6 @@ export default {
   },
   methods: {
     buzz() {
-      console.log("BUZZ")
       this.$store.dispatch("buzz")
     }
   }
