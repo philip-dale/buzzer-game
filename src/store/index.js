@@ -101,7 +101,7 @@ export default new Vuex.Store({
       if (context.state.connected) {
         return
       }
-      context.state.errorMessage = false
+      context.state.showErrorAlert= false
       context.state.showSuccessAlert = false
 
       context.state.webSocket = new WebSocket(process.env.VUE_APP_SERVER_URL)
