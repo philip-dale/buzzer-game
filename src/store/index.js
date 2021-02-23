@@ -24,6 +24,7 @@ const adminMessageCommands = {
   "wrong": 1,
   "nextRound": 2,
   "reset": 3,
+  "cancel": 4,
 }
 
 const buzzGameId = 0

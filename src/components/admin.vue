@@ -10,10 +10,11 @@
         type="text"
       ></b-form-input>
     </div>
-    <b-button @click="correct()" variant="primary">Correct</b-button>
-    <b-button @click="wrong()" variant="primary">Wrong</b-button>
-    <b-button @click="nextRound()" variant="primary">Next Round</b-button>
-    <b-button @click="reset()" variant="primary">Reset</b-button>
+    <b-button class="AdminBtn" @click="cancel()" variant="primary">Cancel</b-button>
+    <b-button class="AdminBtn" @click="correct()" variant="primary">Correct</b-button>
+    <b-button class="AdminBtn" @click="wrong()" variant="primary">Wrong</b-button>
+    <b-button class="AdminBtn" @click="nextRound()" variant="primary">Next Round</b-button>
+    <b-button class="AdminBtn" @click="reset()" variant="primary">Reset</b-button>
   </div>
 </template>
 
@@ -46,6 +47,15 @@ export default {
     reset() {
       this.$store.dispatch("adminAction", "reset");
     },
+    cancel() {
+      this.$store.dispatch("adminAction", "cancel");
+    },
   },
 };
 </script>
+
+<style scoped>
+.AdminBtn {
+  margin: 4px;
+}
+</style>
